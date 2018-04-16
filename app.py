@@ -25,7 +25,7 @@ def addentry():
 def delete_entry():
     delete_id = request.form["theid"]
     model.delete_entry(delete_id)
-    return redirect("/admin")
+    return redirect("/")
 
 
 @app.route("/edit", methods=["POST"])
@@ -33,7 +33,7 @@ def edit_entry():
     edit_id = request.form["theid"]
     new_text = request.form["message"]
     model.edit_entry(edit_id, new_text)
-    return redirect("/admin")
+    return redirect("/")
 
 
 @app.route("/postentry", methods=["POST"])
