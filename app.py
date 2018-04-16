@@ -23,11 +23,9 @@ def addentry():
 
 @app.route("/delete", methods=["POST"])
 def delete_entry():
-    icon = request.form["icon"]
     delete_id = request.form["theid"]
-    if icon == 'X':
-        model.delete_entry(delete_id)
-    return redirect("/")
+    model.delete_entry(delete_id)
+    return redirect("/admin")
 
 
 @app.route("/postentry", methods=["POST"])
