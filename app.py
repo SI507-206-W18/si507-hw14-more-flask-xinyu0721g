@@ -28,6 +28,14 @@ def delete_entry():
     return redirect("/admin")
 
 
+@app.route("/edit", methods=["POST"])
+def edit_entry():
+    edit_id = request.form["theid"]
+    new_text = request.form["message"]
+    model.edit_entry(edit_id, new_text)
+    return redirect("/admin")
+
+
 @app.route("/postentry", methods=["POST"])
 def postentry():
     name = request.form["name"]

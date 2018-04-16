@@ -7,7 +7,12 @@
 
 {% for e in entries %}
     <div class="entry">
-        <p class="entrytext"> {{e['text']}} </p>
+        <form action="/edit" method="POST">
+            <p class="entrytext"><textarea name="message" rows=10 cols=60>{{e['text']}}</textarea>
+            <input type="submit" name="button" value="Submit">
+            <input type="hidden" name="theid" value="{{e['id']}}">
+            </p>
+        </form>
         <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
         <p class="metadata"> id: {{e['id']}} </p>
     </div>

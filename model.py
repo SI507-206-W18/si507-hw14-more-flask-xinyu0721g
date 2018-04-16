@@ -55,3 +55,19 @@ def delete_entry(delete_id):
     except:
         print("ERROR! Could not write entries to file.")
 
+
+def edit_entry(edit_id, new_text):
+    global entries, GUESTBOOK_ENTRIES_FILE
+    now = datetime.now()
+    time_string = now.strftime("%b %d, %Y %-I:%M %p")
+    for i in entries:
+        if i["id"] == edit_id:
+            i['timestamp'] = time_string
+            i['text'] = new_text
+    try:
+        f = open(GUESTBOOK_ENTRIES_FILE, "w")
+        dump_string = json.dumps(entries)
+        f.write(dump_string)
+        f.close()
+    except:
+        print("ERROR! Could not write entries to file.")
