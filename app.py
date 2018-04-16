@@ -3,15 +3,32 @@ import model
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
-    ## print the guestbook
+    # print the guestbook
     return render_template("index.html", entries=model.get_entries())
+
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html", entries=model.get_entries())
+
 
 @app.route("/add")
 def addentry():
-    ## add a guestbook entry
+    # add a guestbook entry
     return render_template("addentry.html")
+
+
+@app.route("/delete", methods=["POST"])
+def delete_entry():
+    icon = request.form["icon"]
+    delete_id = request.form["theid"]
+    if icon == 'X':
+        model.delete_entry(delete_id)
+    return redirect("/")
+
 
 @app.route("/postentry", methods=["POST"])
 def postentry():
@@ -20,6 +37,7 @@ def postentry():
     model.add_entry(name, message)
     return redirect("/")
 
-if __name__=="__main__":
-    model.init()
+
+if __name__ == "__main__":
+    model.init(app)
     app.run(debug=True)
